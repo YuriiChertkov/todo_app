@@ -1,23 +1,16 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import toast, { Toaster } from "react-hot-toast";
+
+const notify = () => toast("Hi i'm new developer.");
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <button className='btn btn-primary' onClick={notify}>
+        Click me!
+      </button>
+      <Toaster />
+      <h1 className='text-3xl font-bold underline'>Hello world!</h1>;
     </div>
   );
 }
