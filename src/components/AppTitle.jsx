@@ -1,9 +1,7 @@
-function AppTitle({ children }) {
-  return (
-    <div className='px-9 py-9 text-center font-sans font-extrabold text-5xl '>
-      {children}
-    </div>
-  );
+import styles from "../styles/modules/title.module.scss";
+
+function AppTitle({ children, ...rest }) {
+  return <div className={styles.title}{...rest}>{children}</div>;
 }
 
 export default AppTitle;
