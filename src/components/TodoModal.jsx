@@ -1,7 +1,10 @@
 import React from "react";
 import toast, { Toaster } from "react-hot-toast";
-import styles from "../styles/modules/modal.module.scss";
 import { MdOutlineClose } from "react-icons/md";
+import { useDispatch } from "react-redux";
+import { v4 as uuid } from "uuid";
+import { addTodo } from "../slices/todoSlice";
+import styles from "../styles/modules/modal.module.scss";
 import Button from "./Button";
 
 const notifyAdd = () => toast.success("Successfully added!");
@@ -9,9 +12,20 @@ const notifyClose = () => toast.success("Successfully closed!");
 const TodoModal = ({ isOpen, onCloseButtonClick }) => {
   const [title, setTitle] = React.useState("");
   const [status, setStatus] = React.useState("incomplete");
+  const dispatch = useDispatch();
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log({ title, status });
+    if (title && status) {
+      dispatch(
+        addTodo({
+          id: uuid(),
+          title: title,
+          status: status,
+          time: new Date().toLocaleDateString(),
+        })
+      );
+    }
   };
   if (!isOpen) {
     return null;

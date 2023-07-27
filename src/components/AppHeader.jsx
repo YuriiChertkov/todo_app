@@ -1,7 +1,7 @@
 import React from "react";
 import TodoModal from "../components/TodoModal";
-import Button, { SelectButton } from "./Button";
 import styles from "../styles/modules/app.module.scss";
+import Button, { SelectButton } from "./Button";
 
 function AppHeader() {
   const [isOpen, setIsOpen] = React.useState(false);
