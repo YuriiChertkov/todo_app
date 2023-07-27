@@ -1,5 +1,5 @@
 import React from "react";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { MdOutlineClose } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { v4 as uuid } from "uuid";
@@ -66,7 +66,7 @@ const TodoModal = ({ isOpen, onCloseButtonClick }) => {
             </select>
           </label>
           <div className={styles.buttonContainer}>
-            <Button type="submit" variant="primary">
+            <Button type="submit" variant="primary" onClick={notifyAdd}>
               Add Task
             </Button>
             <Button
@@ -79,7 +79,6 @@ const TodoModal = ({ isOpen, onCloseButtonClick }) => {
           </div>
         </form>
       </div>
-      <Toaster position="top-left" />
     </div>
   );
 };
