@@ -1,34 +1,46 @@
 import React from "react";
 import toast, { Toaster } from "react-hot-toast";
-const notify = () => toast("Successfully added!");
-const TodoModal = ({ setIsOpen }) => {
-  return (
-    <div className="fixed mx-96 z-50 px-2 py-6 w-96 border rounded-xl border-purple-200 bg-cyan-100">
-      Add Task
-      <div>
-        <div>
-          Title
-          <input
-            className="ml-2 my-4 w-64 border border-purple-200"
-            title="Titles"
-            type="text"
-          />
-        </div>
-        <button
-          className="mx-2 px-4 py-1 text-sm text-purple-600 font-semibold rounded-md border border-purple-200 hover:text-white hover:bg-purple-600 hover:border-transparent"
-          onClick={notify}
-        >
-          Add
-        </button>
+import styles from "../styles/modules/modal.module.scss";
+import { MdOutlineClose } from "react-icons/md";
+import Button from "./Button";
 
-        <button
-          className="mx-2 px-4 py-1 text-sm text-purple-600 font-semibold rounded-md border border-purple-200 hover:text-white hover:bg-purple-600 hover:border-transparent"
-          onClick={() => setIsOpen(false)}
-        >
-          Cancel
-        </button>
+const notifyAdd = () => toast.success("Successfully added!");
+const notifyClose = () => toast.success("Successfully closed!");
+const TodoModal = ({ isOpen, setIsOpen }) => {
+  if (!isOpen) {
+    return null;
+  }
+
+  return (
+    <div className={styles.wrapper}>
+      <div className={styles.container}>
+        <div className={styles.closeButton} onClick={notifyClose}>
+          <MdOutlineClose onClick={setIsOpen} />
+        </div>
+        <form className={styles.form}>
+          <h1 className={styles.formTitle}> Add task</h1>
+          <label htmlFor="title">
+            Title
+            <input type="text" id="title" />
+          </label>
+          <label htmlFor="status">
+            Status
+            <select name="status" id="status">
+              <option value="complete">Complete</option>
+              <option value="incomplete">Incomplete</option>
+            </select>
+          </label>
+          <div className={styles.buttonContainer}>
+            <Button type="submit" variant="primary">
+              Add Task
+            </Button>
+            <Button type="button" variant="secondary">
+              Cancel
+            </Button>
+          </div>
+        </form>
       </div>
-      <Toaster />
+      <Toaster position="top-left" />
     </div>
   );
 };

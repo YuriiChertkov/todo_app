@@ -10,7 +10,7 @@ function App() {
       <AppTitle> TODO LIST</AppTitle>
       <div className={styles.app__wrapper}>
         <AppHeader />
-        <ListOfTasks />{" "}
+        <ListOfTasks />
       </div>
     </div>
   );

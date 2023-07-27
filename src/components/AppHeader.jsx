@@ -15,7 +15,7 @@ function AppHeader() {
           <option value="incomplete">Incomplete</option>
         </SelectButton>
       </div>
-      <div>{isOpen && <TodoModal setIsOpen={setIsOpen} />}</div>
+      <TodoModal isOpen={isOpen} setIsOpen={setIsOpen} />
     </div>
   );
 }
