@@ -6,7 +6,13 @@ import Button from "./Button";
 
 const notifyAdd = () => toast.success("Successfully added!");
 const notifyClose = () => toast.success("Successfully closed!");
-const TodoModal = ({ isOpen, setIsOpen }) => {
+const TodoModal = ({ isOpen, onCloseButtonClick }) => {
+  const [title, setTitle] = React.useState("");
+  const [status, setStatus] = React.useState("incomplete");
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log({ title, status });
+  };
   if (!isOpen) {
     return null;
   }
@@ -14,18 +20,33 @@ const TodoModal = ({ isOpen, setIsOpen }) => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
-        <div className={styles.closeButton} onClick={notifyClose}>
-          <MdOutlineClose onClick={setIsOpen} />
+        <div
+          className={styles.closeButton}
+          onClick={onCloseButtonClick}
+          tabIndex={0}
+          role="button"
+        >
+          <MdOutlineClose onClick={notifyClose} />
         </div>
-        <form className={styles.form}>
+        <form className={styles.form} onSubmit={(e) => handleSubmit(e)}>
           <h1 className={styles.formTitle}> Add task</h1>
           <label htmlFor="title">
             Title
-            <input type="text" id="title" />
+            <input
+              type="text"
+              id="title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
           </label>
           <label htmlFor="status">
             Status
-            <select name="status" id="status">
+            <select
+              name="status"
+              id="status"
+              value={status}
+              onChange={(e) => setStatus(e.target.value)}
+            >
               <option value="complete">Complete</option>
               <option value="incomplete">Incomplete</option>
             </select>
@@ -34,7 +55,11 @@ const TodoModal = ({ isOpen, setIsOpen }) => {
             <Button type="submit" variant="primary">
               Add Task
             </Button>
-            <Button type="button" variant="secondary">
+            <Button
+              type="button"
+              variant="secondary"
+              onClick={onCloseButtonClick}
+            >
               Cancel
             </Button>
           </div>
